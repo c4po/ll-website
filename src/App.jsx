@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import cocoLiPhoto from './assets/cocoli.jpg';
 import cocoLyuPhoto from './assets/cocolyu.jpg';
+import { useI18n } from './i18n.jsx';
 
 // --- 共享组件 ---
 
@@ -32,30 +33,18 @@ const Button = ({ children, primary = true, onClick, className = '' }) => (
 
 // --- 首页视图 ---
 
+const SERVICE_ICONS = [
+  <FileText className="w-8 h-8" />,
+  <Calculator className="w-8 h-8" />,
+  <TrendingUp className="w-8 h-8" />,
+  <Briefcase className="w-8 h-8" />,
+  <Building2 className="w-8 h-8" />,
+  <Users className="w-8 h-8" />,
+  <Globe className="w-8 h-8" />,
+];
+
 const HomeView = ({ navigateTo }) => {
-  const services = [
-    { title: '财务管理', desc: '企业记账、财务报表、多公司财务整合', icon: <FileText className="w-8 h-8" /> },
-    { title: '税务服务', desc: '企业税、个人税、HST、Payroll', icon: <Calculator className="w-8 h-8" /> },
-    { title: '税务规划', desc: '企业结构优化、节税策略设计', icon: <TrendingUp className="w-8 h-8" /> },
-    { title: '商业咨询', desc: '企业增长支持、财务战略规划', icon: <Briefcase className="w-8 h-8" /> },
-    { title: '公司设立', desc: '公司注册、结构设计、股权规划', icon: <Building2 className="w-8 h-8" /> },
-    { title: '非盈利组织服务', desc: '社团 / 协会 / 公益组织财务管理', icon: <Users className="w-8 h-8" /> },
-    { title: '跨境业务支持', desc: '中国 ↔ 加拿大财税与结构规划', icon: <Globe className="w-8 h-8" /> },
-  ];
-
-  const industries = [
-    '教育与培训集团', '房地产与投资行业', '建筑与工程企业', 
-    '餐饮与零售行业', '移民与咨询行业', '科技与初创企业', '非盈利组织与行业协会'
-  ];
-
-  const advantages = [
-    '管理20+公司集团财务经验',
-    '非盈利组织财务管理经验',
-    '政府体系 + 会计师事务所背景',
-    '多行业复杂财务处理能力',
-    '中 / 英 / 法三语服务能力',
-    '财务 + 税务 + 商业咨询一体化支持'
-  ];
+  const { t } = useI18n();
 
   return (
     <div className="animate-fadeIn">
@@ -70,37 +59,31 @@ const HomeView = ({ navigateTo }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              专业财税与商业咨询服务<br />
-              <span className="text-amber-500">助力企业稳健增长与长期合规</span>
+              {t.hero.title1}<br />
+              <span className="text-amber-500">{t.hero.title2}</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 mb-8 border-l-4 border-amber-500 pl-4">
-              L&L Advisory｜多伦多专业财税事务所<br />
-              <span className="text-lg">中 · 英 · 法三语服务企业与机构客户</span>
+              {t.hero.firm}<br />
+              <span className="text-lg">{t.hero.languages}</span>
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Button onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>
-                预约专业咨询 <ArrowRight className="w-5 h-5" />
+                {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
               </Button>
               <Button primary={false} onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })} className="!bg-transparent border-slate-400 text-white hover:!bg-white/10 hover:text-white">
-                获取初步财务评估
+                {t.hero.ctaSecondary}
               </Button>
             </div>
 
-            {/* 核心信任标签 */}
+            {/* Trust badges */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-slate-700">
-              <div className="flex items-center gap-3">
-                <Award className="w-6 h-6 text-amber-500 flex-shrink-0" />
-                <span className="text-sm font-medium">20+年财税与企业管理经验</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Landmark className="w-6 h-6 text-amber-500 flex-shrink-0" />
-                <span className="text-sm font-medium">管理20+公司集团财务体系</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Shield className="w-6 h-6 text-amber-500 flex-shrink-0" />
-                <span className="text-sm font-medium">服务企业 / 非盈利组织 / 行业协会</span>
-              </div>
+              {[Award, Landmark, Shield].map((Icon, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <Icon className="w-6 h-6 text-amber-500 flex-shrink-0" />
+                  <span className="text-sm font-medium">{t.hero.badges[i]}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -111,16 +94,12 @@ const HomeView = ({ navigateTo }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <SectionHeading title="关于 L&L Advisory" />
+              <SectionHeading title={t.about.heading} />
               <div className="space-y-6 text-lg text-slate-600">
-                <p>
-                  L&L Advisory是一家位于多伦多的专业财税与商业咨询事务所，由两位拥有超过20年经验的资深专业人士共同创立。
-                </p>
-                <p>
-                  我们专注于企业财务管理、税务规划及商业结构优化，服务客户涵盖企业集团、成长型企业及非盈利组织。
-                </p>
+                <p>{t.about.paragraphs[0]}</p>
+                <p>{t.about.paragraphs[1]}</p>
                 <p className="font-medium text-slate-800 border-l-4 border-amber-500 pl-4 py-2 bg-slate-50">
-                  我们不仅提供基础会计与报税服务，更致力于帮助客户建立清晰、规范且可持续的财务体系，以支持长期业务发展。
+                  {t.about.paragraphs[2]}
                 </p>
               </div>
             </div>
@@ -129,8 +108,8 @@ const HomeView = ({ navigateTo }) => {
                 <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80" alt="Professional Consulting" className="object-cover w-full h-full" />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-amber-500 text-white p-8 rounded-lg shadow-xl hidden md:block">
-                <p className="text-4xl font-bold mb-2">20+</p>
-                <p className="text-sm font-medium">年行业资深经验</p>
+                <p className="text-4xl font-bold mb-2">{t.about.statYears}</p>
+                <p className="text-sm font-medium">{t.about.statLabel}</p>
               </div>
             </div>
           </div>
@@ -140,12 +119,12 @@ const HomeView = ({ navigateTo }) => {
       {/* 3. 创始合伙人概览 */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading 
-            title="我们的创始合伙人" 
-            subtitle="由具备跨国企业、政府体系及顶级会计师事务所背景的资深专家领衔"
+          <SectionHeading
+            title={t.founders.heading}
+            subtitle={t.founders.subtitle}
             centered={true}
           />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
             {/* CoCo Li */}
             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
@@ -157,17 +136,15 @@ const HomeView = ({ navigateTo }) => {
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900">CoCo Li</h3>
-                  <p className="text-amber-600 font-medium">Business & Tax Advisory Lead</p>
+                  <p className="text-amber-600 font-medium">{t.founders.li.title}</p>
                 </div>
               </div>
-              <p className="text-slate-600 mb-6 line-clamp-3">
-                拥有20+年加拿大财税与商业咨询经验，曾在会计师事务所任职，长期服务企业客户及非盈利组织。目前负责教育相关集团旗下20余家公司财务与税务管理工作...
-              </p>
-              <button 
+              <p className="text-slate-600 mb-6 line-clamp-3">{t.founders.li.bio}</p>
+              <button
                 onClick={() => navigateTo('team')}
                 className="text-slate-900 font-semibold flex items-center gap-2 hover:text-amber-600 transition-colors group"
               >
-                查看完整履历 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                {t.founders.viewProfile} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
@@ -181,17 +158,15 @@ const HomeView = ({ navigateTo }) => {
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900">CoCo Lyu</h3>
-                  <p className="text-amber-600 font-medium">Accounting & Compliance Lead</p>
+                  <p className="text-amber-600 font-medium">{t.founders.lyu.title}</p>
                 </div>
               </div>
-              <p className="text-slate-600 mb-6 line-clamp-3">
-                拥有20+年财务与会计经验，职业生涯始于中国政府财务体系，长期从事财务合规与制度化管理工作，具备扎实的风险控制与财务规范能力...
-              </p>
-              <button 
+              <p className="text-slate-600 mb-6 line-clamp-3">{t.founders.lyu.bio}</p>
+              <button
                 onClick={() => navigateTo('team')}
                 className="text-slate-900 font-semibold flex items-center gap-2 hover:text-amber-600 transition-colors group"
               >
-                查看完整履历 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                {t.founders.viewProfile} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -201,13 +176,13 @@ const HomeView = ({ navigateTo }) => {
       {/* 4. 核心服务 */}
       <section className="py-20 bg-white" id="services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="我们的专业服务" centered={true} />
-          
+          <SectionHeading title={t.services.heading} centered={true} />
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {services.map((service, index) => (
+            {t.services.items.map((service, index) => (
               <div key={index} className="p-8 border border-slate-100 rounded-xl hover:shadow-xl hover:border-amber-200 transition-all duration-300 group bg-slate-50 hover:bg-white">
                 <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {service.icon}
+                  {SERVICE_ICONS[index]}
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
                 <p className="text-slate-600">{service.desc}</p>
@@ -222,12 +197,12 @@ const HomeView = ({ navigateTo }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
-            {/* 行业覆盖 */}
+            {/* Industries */}
             <div>
-              <h2 className="text-3xl font-bold mb-4">我们服务的行业领域</h2>
+              <h2 className="text-3xl font-bold mb-4">{t.industries.heading}</h2>
               <div className="w-20 h-1 bg-amber-500 mb-8"></div>
               <div className="flex flex-wrap gap-3">
-                {industries.map((industry, index) => (
+                {t.industries.items.map((industry, index) => (
                   <span key={index} className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 text-sm">
                     {industry}
                   </span>
@@ -235,13 +210,13 @@ const HomeView = ({ navigateTo }) => {
               </div>
             </div>
 
-            {/* 为什么选择我们 */}
+            {/* Why choose us */}
             <div>
-              <h2 className="text-3xl font-bold mb-4">为什么选择 L&L Advisory</h2>
+              <h2 className="text-3xl font-bold mb-4">{t.advantages.heading}</h2>
               <div className="w-20 h-1 bg-amber-500 mb-8"></div>
-              <p className="text-slate-400 mb-8 italic">高标准的专业能力，决定了我们能为您创造的长期价值。</p>
+              <p className="text-slate-400 mb-8 italic">{t.advantages.subtitle}</p>
               <div className="space-y-4">
-                {advantages.map((adv, index) => (
+                {t.advantages.items.map((adv, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
                     <span className="text-lg text-slate-200">{adv}</span>
@@ -261,11 +236,9 @@ const HomeView = ({ navigateTo }) => {
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <p className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-relaxed">
-            "We don’t just manage numbers — we build financial clarity and long-term business growth."
+            {t.philosophy.quote}
           </p>
-          <p className="text-lg text-slate-600">
-            我们不仅处理账务，更帮助客户建立清晰、合规且可持续发展的财务体系。
-          </p>
+          <p className="text-lg text-slate-600">{t.philosophy.subtitle}</p>
         </div>
       </section>
     </div>
@@ -275,13 +248,15 @@ const HomeView = ({ navigateTo }) => {
 // --- 合伙人独立页面视图 ---
 
 const TeamView = () => {
+  const { t } = useI18n();
+  const team = t.team;
   return (
     <div className="animate-fadeIn pt-24 pb-20 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="mb-16 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Founders</h1>
-          <p className="text-lg text-slate-600">L&L Advisory 创始合伙人</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{team.pageTitle}</h1>
+          <p className="text-lg text-slate-600">{team.pageSubtitle}</p>
           <div className="w-24 h-1 bg-amber-500 mx-auto mt-6"></div>
         </div>
 
@@ -295,11 +270,11 @@ const TeamView = () => {
                 className="w-40 h-40 rounded-full object-cover object-top mb-6 ring-4 ring-amber-500/40 shadow-xl"
               />
               <h2 className="text-3xl font-bold mb-2">CoCo Li</h2>
-              <p className="text-amber-400 font-medium text-lg mb-8">Business & Tax Advisory Lead</p>
-              
-              <h4 className="text-sm uppercase tracking-wider text-slate-400 mb-4 font-semibold">核心能力</h4>
+              <p className="text-amber-400 font-medium text-lg mb-8">{t.founders.li.title}</p>
+
+              <h4 className="text-sm uppercase tracking-wider text-slate-400 mb-4 font-semibold">{team.sections.skills}</h4>
               <ul className="space-y-3 mb-8">
-                {['企业税务规划与优化', '商业结构设计与调整', '财务战略与增长支持', '跨行业复杂财务经验', '中 / 英 / 法三语服务能力'].map((item, i) => (
+                {team.li.skills.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-amber-500 flex-shrink-0" />
                     <span className="text-slate-200 text-sm">{item}</span>
@@ -307,47 +282,40 @@ const TeamView = () => {
                 ))}
               </ul>
             </div>
-            
+
             <div className="lg:w-2/3 p-10 lg:p-12">
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">专业背景</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  CoCo Li拥有20+年加拿大财税与商业咨询经验，曾在会计师事务所任职，长期服务企业客户及非盈利组织，具备扎实的税务与商业结构设计能力。
-                </p>
+                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">{team.sections.background}</h3>
+                <p className="text-slate-600 leading-relaxed">{team.li.background}</p>
               </div>
-              
+
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">当前工作范围</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  负责教育相关集团旗下20余家公司财务与税务管理，同时服务多伦多多个行业及公益组织。
-                </p>
+                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">{team.sections.scope}</h3>
+                <p className="text-slate-600 leading-relaxed">{team.li.scope}</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">重点服务行业</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">{team.sections.industries}</h3>
                   <ul className="space-y-2 text-slate-600">
-                    <li>• 教育与培训机构</li>
-                    <li>• 房地产与投资行业</li>
-                    <li>• 建筑与工程企业</li>
-                    <li>• 餐饮与零售行业</li>
-                    <li>• 移民与咨询行业</li>
-                    <li>• 非盈利组织与协会</li>
+                    {team.li.industries.map((item, i) => (
+                      <li key={i}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">社区与组织参与</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4">{team.sections.community}</h3>
                   <ul className="space-y-2 text-slate-600">
-                    <li>• 齐鲁商会 (Toronto Qilu Assoc.)</li>
-                    <li>• 加拿大狮子会 (Lions Club)</li>
-                    <li>• 多个华人社区及行业组织</li>
+                    {team.li.community.map((item, i) => (
+                      <li key={i}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
 
               <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-lg">
-                <h3 className="text-amber-800 font-bold mb-2">核心价值</h3>
-                <p className="text-amber-900">推动企业实现从财务合规 → 税务优化 → 商业增长的完整路径。</p>
+                <h3 className="text-amber-800 font-bold mb-2">{team.sections.value}</h3>
+                <p className="text-amber-900">{team.li.value}</p>
               </div>
             </div>
           </div>
@@ -361,11 +329,11 @@ const TeamView = () => {
                 className="w-40 h-40 rounded-full object-cover object-top mb-6 ring-4 ring-amber-500/40 shadow-xl"
               />
               <h2 className="text-3xl font-bold mb-2">CoCo Lyu</h2>
-              <p className="text-amber-400 font-medium text-lg mb-8">Accounting & Compliance Lead</p>
-              
-              <h4 className="text-sm uppercase tracking-wider text-slate-400 mb-4 font-semibold">核心能力</h4>
+              <p className="text-amber-400 font-medium text-lg mb-8">{t.founders.lyu.title}</p>
+
+              <h4 className="text-sm uppercase tracking-wider text-slate-400 mb-4 font-semibold">{team.sections.skills}</h4>
               <ul className="space-y-3 mb-8">
-                {['多公司财务体系管理', '财务流程标准化建设', '财务合规与风险控制', '非盈利组织财务管理', '集团账务整合'].map((item, i) => (
+                {team.lyu.skills.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-amber-500 flex-shrink-0" />
                     <span className="text-slate-200 text-sm">{item}</span>
@@ -373,33 +341,30 @@ const TeamView = () => {
                 ))}
               </ul>
             </div>
-            
+
             <div className="lg:w-2/3 p-10 lg:p-12">
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">专业背景</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  CoCo Lyu拥有20+年财务与会计经验，职业起点为中国政府财务体系，长期从事财务合规与制度化管理，具备高度规范化的财务管理能力。
-                </p>
-              </div>
-              
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">当前工作范围</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  负责教育相关集团旗下20余家公司财务与税务申报，同时服务多伦多多个非盈利组织及社团机构。
-                </p>
+                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">{team.sections.background}</h3>
+                <p className="text-slate-600 leading-relaxed">{team.lyu.background}</p>
               </div>
 
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-slate-900 mb-4">服务机构</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">{team.sections.scope}</h3>
+                <p className="text-slate-600 leading-relaxed">{team.lyu.scope}</p>
+              </div>
+
+              <div className="mb-8">
+                <h3 className="text-lg font-bold text-slate-900 mb-4">{team.sections.organizations}</h3>
                 <ul className="space-y-2 text-slate-600">
-                  <li>• 齐鲁商会</li>
-                  <li>• 加拿大狮子会（Lions Club）</li>
+                  {team.lyu.organizations.map((item, i) => (
+                    <li key={i}>• {item}</li>
+                  ))}
                 </ul>
               </div>
 
               <div className="bg-slate-100 border-l-4 border-slate-600 p-6 rounded-r-lg mt-auto">
-                <h3 className="text-slate-800 font-bold mb-2">核心价值</h3>
-                <p className="text-slate-700">构建稳定、规范、可持续的财务体系，保障企业长期合规运营。</p>
+                <h3 className="text-slate-800 font-bold mb-2">{team.sections.value}</h3>
+                <p className="text-slate-700">{team.lyu.value}</p>
               </div>
             </div>
           </div>
@@ -417,6 +382,8 @@ export default function App() {
   const [currentView, setCurrentView] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t, lang, setLang } = useI18n();
+  const toggleLang = () => setLang(lang === 'en' ? 'zh' : 'en');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -448,28 +415,50 @@ export default function App() {
               L&L <span className="text-amber-500">Advisory</span>
             </div>
 
-            {/* 桌面端菜单 */}
-            <div className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => navigateTo('home')} 
+            {/* Desktop menu */}
+            <div className="hidden md:flex items-center space-x-6">
+              <button
+                onClick={() => navigateTo('home')}
                 className={`font-medium transition-colors hover:text-amber-500 ${scrolled ? 'text-slate-700' : 'text-slate-300'} ${currentView === 'home' && '!text-amber-500'}`}
               >
-                首页
+                {t.nav.home}
               </button>
-              <button 
-                onClick={() => navigateTo('team')} 
+              <button
+                onClick={() => navigateTo('team')}
                 className={`font-medium transition-colors hover:text-amber-500 ${scrolled ? 'text-slate-700' : 'text-slate-300'} ${currentView === 'team' && '!text-amber-500'}`}
               >
-                合伙人团队
+                {t.nav.team}
+              </button>
+              <button
+                onClick={toggleLang}
+                aria-label="Toggle language"
+                className={`text-sm font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+                  scrolled
+                    ? 'border-slate-300 text-slate-700 hover:border-amber-500 hover:text-amber-600'
+                    : 'border-slate-500 text-slate-200 hover:border-amber-500 hover:text-amber-400'
+                }`}
+              >
+                {t.common.switchTo}
               </button>
               <Button onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })} className="!py-2 !px-5 text-sm">
-                联系我们
+                {t.nav.contact}
               </Button>
             </div>
 
-            {/* 移动端菜单按钮 */}
-            <div className="md:hidden flex items-center">
-              <button 
+            {/* Mobile menu button */}
+            <div className="md:hidden flex items-center gap-2">
+              <button
+                onClick={toggleLang}
+                aria-label="Toggle language"
+                className={`text-sm font-semibold px-3 py-1.5 rounded-full border ${
+                  scrolled
+                    ? 'border-slate-300 text-slate-700'
+                    : 'border-slate-500 text-white'
+                }`}
+              >
+                {t.common.switchTo}
+              </button>
+              <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={`p-2 rounded-md ${scrolled ? 'text-slate-900' : 'text-white'}`}
               >
@@ -479,25 +468,25 @@ export default function App() {
           </div>
         </div>
 
-        {/* 移动端菜单下拉 */}
+        {/* Mobile menu dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white shadow-xl absolute w-full left-0 border-t border-slate-100">
             <div className="px-4 pt-2 pb-6 space-y-1 flex flex-col">
-              <button 
-                onClick={() => navigateTo('home')} 
+              <button
+                onClick={() => navigateTo('home')}
                 className={`block px-3 py-4 text-left font-medium border-b border-slate-50 ${currentView === 'home' ? 'text-amber-600' : 'text-slate-700'}`}
               >
-                首页
+                {t.nav.home}
               </button>
-              <button 
-                onClick={() => navigateTo('team')} 
+              <button
+                onClick={() => navigateTo('team')}
                 className={`block px-3 py-4 text-left font-medium border-b border-slate-50 ${currentView === 'team' ? 'text-amber-600' : 'text-slate-700'}`}
               >
-                合伙人团队
+                {t.nav.team}
               </button>
               <div className="pt-4 px-3">
-                <Button className="w-full" onClick={() => {setIsMobileMenuOpen(false); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });}}>
-                  预约咨询
+                <Button className="w-full" onClick={() => { setIsMobileMenuOpen(false); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }}>
+                  {t.hero.ctaPrimary}
                 </Button>
               </div>
             </div>
@@ -515,53 +504,49 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             
-            {/* 品牌信息 */}
+            {/* Brand */}
             <div>
               <div className="text-3xl font-bold text-white mb-6">
                 L&L <span className="text-amber-500">Advisory</span>
               </div>
               <p className="text-slate-400 mb-6">
-                多伦多专业财税事务所。<br/>中 · 英 · 法三语服务企业与机构客户。
+                {t.footer.taglineLines[0]}<br />{t.footer.taglineLines[1]}
               </p>
             </div>
 
-            {/* 联系方式 */}
+            {/* Contact */}
             <div>
-              <h3 className="text-xl font-bold text-white mb-6">联系方式</h3>
+              <h3 className="text-xl font-bold text-white mb-6">{t.footer.contactHeading}</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-amber-500 flex-shrink-0 mt-1" />
-                  <span>Toronto / Markham, ON<br/>Canada</span>
+                  <span>{t.footer.address[0]}<br />{t.footer.address[1]}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-amber-500 flex-shrink-0" />
-                  <a href="mailto:info@lladvisory.ca" className="hover:text-amber-400 transition-colors">contact@lladvisory.com</a>
+                  <a href="mailto:contact@lladvisory.com" className="hover:text-amber-400 transition-colors">contact@lladvisory.com</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-amber-500 flex-shrink-0" />
-                  <span>Phone / WeChat: 提供后补充</span>
+                  <span>{t.footer.phone}</span>
                 </div>
               </div>
             </div>
 
-            {/* CTA区域 */}
+            {/* CTA */}
             <div>
-              <h3 className="text-xl font-bold text-white mb-6">开启长期商业增长</h3>
-              <p className="text-slate-400 mb-6">
-                留下您的联系方式，我们的创始合伙人将为您提供初步的财务评估与咨询。
-              </p>
-              <Button className="w-full">
-                预约专业咨询
-              </Button>
+              <h3 className="text-xl font-bold text-white mb-6">{t.footer.ctaHeading}</h3>
+              <p className="text-slate-400 mb-6">{t.footer.ctaBody}</p>
+              <Button className="w-full">{t.footer.ctaButton}</Button>
             </div>
 
           </div>
-          
+
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>© {new Date().getFullYear()} L&L Advisory. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} L&L Advisory. {t.footer.rights}</p>
             <div className="flex space-x-6">
-              <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
+              <span className="hover:text-white cursor-pointer transition-colors">{t.footer.privacy}</span>
+              <span className="hover:text-white cursor-pointer transition-colors">{t.footer.terms}</span>
             </div>
           </div>
         </div>
