@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Base path matches the GitHub Pages project URL: https://<user>.github.io/<repo>/
+// Custom domain (ll.bonesoul.com) serves the site at root.
 export default defineConfig({
-  base: '/ll-website/',
+  base: '/',
   plugins: [react()],
 });
