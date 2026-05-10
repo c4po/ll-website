@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Menu, X, ChevronRight, CheckCircle2, Calculator, Briefcase, 
-  Globe, Users, TrendingUp, Building2, MapPin, Mail, Phone, 
+import {
+  Menu, X, ChevronRight, CheckCircle2, Calculator, Briefcase,
+  Globe, Users, TrendingUp, Building2, MapPin, Mail, Phone,
   Award, Shield, FileText, ArrowRight, Landmark
 } from 'lucide-react';
+import cocoLiPhoto from './assets/cocoli.jpg';
+import cocoLyuPhoto from './assets/cocolyu.jpg';
 
 // --- 共享组件 ---
 
@@ -147,8 +149,17 @@ const HomeView = ({ navigateTo }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
             {/* CoCo Li */}
             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <h3 className="text-2xl font-bold text-slate-900 mb-1">CoCo Li</h3>
-              <p className="text-amber-600 font-medium mb-6">Business & Tax Advisory Lead</p>
+              <div className="flex items-center gap-5 mb-6">
+                <img
+                  src={cocoLiPhoto}
+                  alt="CoCo Li"
+                  className="w-20 h-20 rounded-full object-cover object-top shadow-md flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">CoCo Li</h3>
+                  <p className="text-amber-600 font-medium">Business & Tax Advisory Lead</p>
+                </div>
+              </div>
               <p className="text-slate-600 mb-6 line-clamp-3">
                 拥有20+年加拿大财税与商业咨询经验，曾在会计师事务所任职，长期服务企业客户及非盈利组织。目前负责教育相关集团旗下20余家公司财务与税务管理工作...
               </p>
@@ -162,8 +173,17 @@ const HomeView = ({ navigateTo }) => {
 
             {/* CoCo Lyu */}
             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <h3 className="text-2xl font-bold text-slate-900 mb-1">CoCo Lyu</h3>
-              <p className="text-amber-600 font-medium mb-6">Accounting & Compliance Lead</p>
+              <div className="flex items-center gap-5 mb-6">
+                <img
+                  src={cocoLyuPhoto}
+                  alt="CoCo Lyu"
+                  className="w-20 h-20 rounded-full object-cover object-top shadow-md flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">CoCo Lyu</h3>
+                  <p className="text-amber-600 font-medium">Accounting & Compliance Lead</p>
+                </div>
+              </div>
               <p className="text-slate-600 mb-6 line-clamp-3">
                 拥有20+年财务与会计经验，职业生涯始于中国政府财务体系，长期从事财务合规与制度化管理工作，具备扎实的风险控制与财务规范能力...
               </p>
@@ -269,7 +289,11 @@ const TeamView = () => {
           {/* CoCo Li */}
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row border border-slate-100">
             <div className="lg:w-1/3 bg-slate-900 text-white p-10 flex flex-col justify-center">
-              <div className="w-24 h-24 bg-amber-500 rounded-full mb-6 flex items-center justify-center text-3xl font-bold">CL</div>
+              <img
+                src={cocoLiPhoto}
+                alt="CoCo Li"
+                className="w-40 h-40 rounded-full object-cover object-top mb-6 ring-4 ring-amber-500/40 shadow-xl"
+              />
               <h2 className="text-3xl font-bold mb-2">CoCo Li</h2>
               <p className="text-amber-400 font-medium text-lg mb-8">Business & Tax Advisory Lead</p>
               
@@ -331,7 +355,11 @@ const TeamView = () => {
           {/* CoCo Lyu */}
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row-reverse border border-slate-100">
             <div className="lg:w-1/3 bg-slate-800 text-white p-10 flex flex-col justify-center">
-              <div className="w-24 h-24 bg-amber-500 rounded-full mb-6 flex items-center justify-center text-3xl font-bold">CL</div>
+              <img
+                src={cocoLyuPhoto}
+                alt="CoCo Lyu"
+                className="w-40 h-40 rounded-full object-cover object-top mb-6 ring-4 ring-amber-500/40 shadow-xl"
+              />
               <h2 className="text-3xl font-bold mb-2">CoCo Lyu</h2>
               <p className="text-amber-400 font-medium text-lg mb-8">Accounting & Compliance Lead</p>
               
