@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import cocoLiPhoto from './assets/cocoli.jpg';
 import cocoLyuPhoto from './assets/cocolyu.jpg';
+import logo from './assets/logo.png';
 import { useI18n } from './i18n.jsx';
 
 // --- 共享组件 ---
@@ -58,6 +59,11 @@ const HomeView = ({ navigateTo }) => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
+            <img
+              src={logo}
+              alt="L&L Business Solutions"
+              className="w-full max-w-[260px] h-auto mb-8 bg-white rounded-lg p-3"
+            />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
               {t.hero.title1}<br />
               <span className="text-amber-500">{t.hero.title2}</span>
@@ -408,12 +414,19 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div 
-              className={`text-2xl font-bold cursor-pointer transition-colors ${scrolled ? 'text-slate-900' : 'text-white'}`}
+            <button
               onClick={() => navigateTo('home')}
+              aria-label="L&L Business Solutions home"
+              className={`cursor-pointer transition-colors ${
+                scrolled ? '' : 'bg-white rounded-md px-2 py-1'
+              }`}
             >
-              L&L <span className="text-amber-500">Advisory</span>
-            </div>
+              <img
+                src={logo}
+                alt="L&L Business Solutions"
+                className="h-10 md:h-12 w-auto block"
+              />
+            </button>
 
             {/* Desktop menu */}
             <div className="hidden md:flex items-center space-x-6">
@@ -507,7 +520,7 @@ export default function App() {
             {/* Brand */}
             <div>
               <div className="text-3xl font-bold text-white mb-6">
-                L&L <span className="text-amber-500">Advisory</span>
+                L&L Business <span className="text-amber-500">Solutions</span>
               </div>
               <p className="text-slate-400 mb-6">
                 {t.footer.taglineLines[0]}<br />{t.footer.taglineLines[1]}
@@ -524,7 +537,7 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-amber-500 flex-shrink-0" />
-                  <a href="mailto:contact@lladvisory.com" className="hover:text-amber-400 transition-colors">contact@lladvisory.com</a>
+                  <a href="mailto:coco@llbsolution.com" className="hover:text-amber-400 transition-colors">coco@llbsolution.com</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-amber-500 flex-shrink-0" />
@@ -543,7 +556,7 @@ export default function App() {
           </div>
 
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>© {new Date().getFullYear()} L&L Advisory. {t.footer.rights}</p>
+            <p>© {new Date().getFullYear()} L&L Business Solutions. {t.footer.rights}</p>
             <div className="flex space-x-6">
               <span className="hover:text-white cursor-pointer transition-colors">{t.footer.privacy}</span>
               <span className="hover:text-white cursor-pointer transition-colors">{t.footer.terms}</span>
