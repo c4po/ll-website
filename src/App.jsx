@@ -160,7 +160,7 @@ const HomeView = ({ navigateTo }) => {
                 <img
                   src={cocoLyuPhoto}
                   alt="CoCo Lyu"
-                  className="w-20 h-20 rounded-full object-cover object-top shadow-md flex-shrink-0"
+                  className="w-20 h-20 rounded-full object-cover object-[center_25%] shadow-md flex-shrink-0"
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900">CoCo Lyu</h3>
@@ -332,7 +332,7 @@ const TeamView = () => {
               <img
                 src={cocoLyuPhoto}
                 alt="CoCo Lyu"
-                className="w-40 h-40 rounded-full object-cover object-top mb-6 ring-4 ring-amber-500/40 shadow-xl"
+                className="w-40 h-40 rounded-full object-cover object-[center_25%] mb-6 ring-4 ring-amber-500/40 shadow-xl"
               />
               <h2 className="text-3xl font-bold mb-2">CoCo Lyu</h2>
               <p className="text-amber-400 font-medium text-lg mb-8">{t.founders.lyu.title}</p>
