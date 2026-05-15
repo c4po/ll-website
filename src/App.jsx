@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   Menu, X, ChevronRight, CheckCircle2, Calculator, Briefcase,
-  Globe, Users, TrendingUp, Building2, MapPin, Mail, Phone,
-  Award, Shield, FileText, ArrowRight, Landmark
+  Globe, Users, TrendingUp, MapPin, Mail, Phone,
+  Award, Shield, ArrowRight, Landmark
 } from 'lucide-react';
 import cocoLiPhoto from './assets/cocoli.jpg';
 import cocoLyuPhoto from './assets/cocolyu.jpg';
@@ -35,13 +35,12 @@ const Button = ({ children, primary = true, onClick, className = '' }) => (
 // --- 首页视图 ---
 
 const SERVICE_ICONS = [
-  <FileText className="w-8 h-8" />,
-  <Calculator className="w-8 h-8" />,
   <TrendingUp className="w-8 h-8" />,
-  <Briefcase className="w-8 h-8" />,
-  <Building2 className="w-8 h-8" />,
   <Users className="w-8 h-8" />,
+  <Briefcase className="w-8 h-8" />,
   <Globe className="w-8 h-8" />,
+  <Landmark className="w-8 h-8" />,
+  <Calculator className="w-8 h-8" />,
 ];
 
 const HomeView = ({ navigateTo }) => {
@@ -84,7 +83,7 @@ const HomeView = ({ navigateTo }) => {
 
             {/* Trust badges */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-slate-700">
-              {[Award, Landmark, Shield].map((Icon, i) => (
+              {[Award, Shield, Globe].map((Icon, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <Icon className="w-6 h-6 text-amber-500 flex-shrink-0" />
                   <span className="text-sm font-medium">{t.hero.badges[i]}</span>
@@ -190,47 +189,40 @@ const HomeView = ({ navigateTo }) => {
                 <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   {SERVICE_ICONS[index]}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-                <p className="text-slate-600">{service.desc}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">
+                  <span className="text-amber-600 mr-2">{index + 1}.</span>
+                  {service.title}
+                </h3>
+                <ul className="space-y-2 text-slate-600">
+                  {service.bullets.map((b, bi) => (
+                    <li key={bi} className="flex gap-2">
+                      <span className="text-amber-500 flex-shrink-0">•</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. 行业覆盖 & 6. 为什么选择我们 */}
+      {/* 5. 我们的优势 */}
       <section className="py-20 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            
-            {/* Industries */}
-            <div>
-              <h2 className="text-3xl font-bold mb-4">{t.industries.heading}</h2>
-              <div className="w-20 h-1 bg-amber-500 mb-8"></div>
-              <div className="flex flex-wrap gap-3">
-                {t.industries.items.map((industry, index) => (
-                  <span key={index} className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 text-sm">
-                    {industry}
-                  </span>
-                ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.advantages.heading}</h2>
+            <div className="w-20 h-1 bg-amber-500 mx-auto mb-6"></div>
+            <p className="text-slate-400 italic max-w-3xl mx-auto">{t.advantages.subtitle}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {t.advantages.items.map((adv, index) => (
+              <div key={index} className="p-6 bg-slate-800/60 rounded-xl border border-slate-700 hover:border-amber-500/60 transition-colors">
+                <CheckCircle2 className="w-8 h-8 text-amber-500 mb-4" />
+                <h3 className="text-lg font-bold mb-2">{adv.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{adv.desc}</p>
               </div>
-            </div>
-
-            {/* Why choose us */}
-            <div>
-              <h2 className="text-3xl font-bold mb-4">{t.advantages.heading}</h2>
-              <div className="w-20 h-1 bg-amber-500 mb-8"></div>
-              <p className="text-slate-400 mb-8 italic">{t.advantages.subtitle}</p>
-              <div className="space-y-4">
-                {t.advantages.items.map((adv, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-lg text-slate-200">{adv}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
