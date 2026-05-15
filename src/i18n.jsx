@@ -6,7 +6,7 @@ const SUPPORTED = ['en', 'zh'];
 
 export const translations = {
   en: {
-    nav: { home: 'Home', team: 'Founders', contact: 'Contact Us' },
+    nav: { home: 'Home', team: 'Founders', links: 'Resources', partners: 'Partners', contact: 'Contact Us' },
     hero: {
       title1: 'Professional Tax & Business Advisory',
       title2: 'Built for sustainable growth and long-term compliance',
@@ -143,6 +143,46 @@ export const translations = {
           'Build stable, structured, and sustainable financial systems that safeguard long-term compliance.',
       },
     },
+    links: {
+      pageTitle: 'Useful Resources',
+      pageSubtitle: 'Tax, compliance, and business-formation links our clients use most often',
+      groups: [
+        {
+          heading: 'Government & Tax',
+          items: [
+            { name: 'Canada Revenue Agency (CRA)', url: '#', desc: 'Federal tax filing, GST/HST, payroll, and business accounts.' },
+            { name: 'Ontario Ministry of Finance', url: '#', desc: 'Provincial tax programs and employer health tax.' },
+            { name: 'Service Ontario', url: '#', desc: 'Business registry, licensing, and compliance filings.' },
+          ],
+        },
+        {
+          heading: 'Compliance & Professional Bodies',
+          items: [
+            { name: 'CPA Canada', url: '#', desc: 'Standards, publications, and practitioner resources.' },
+            { name: 'WSIB Ontario', url: '#', desc: 'Workplace safety and insurance for Ontario employers.' },
+          ],
+        },
+        {
+          heading: 'Business Formation',
+          items: [
+            { name: 'Federal Incorporation', url: '#', desc: 'Incorporate a business under the Canada Business Corporations Act.' },
+            { name: 'Ontario Business Registry', url: '#', desc: 'Register, renew, and update an Ontario business or corporation.' },
+          ],
+        },
+      ],
+    },
+    partners: {
+      pageTitle: 'Our Partners',
+      pageSubtitle: 'Trusted professionals and organizations we collaborate with to serve our clients',
+      items: [
+        { name: 'Partner Firm A', tag: 'Legal & Corporate', desc: 'Corporate counsel and contract advisory for growth-stage clients.' },
+        { name: 'Partner Firm B', tag: 'Banking & Finance', desc: 'Commercial banking and credit facilities for SMEs and enterprise groups.' },
+        { name: 'Partner Firm C', tag: 'Immigration & Cross-Border', desc: 'Immigration, work permit, and cross-border structuring advisory.' },
+        { name: 'Partner Firm D', tag: 'Insurance & Risk', desc: 'Commercial insurance, group benefits, and risk management.' },
+        { name: 'Partner Firm E', tag: 'Technology & Operations', desc: 'Cloud accounting, ERP, and finance automation implementation.' },
+        { name: 'Partner Firm F', tag: 'Real Estate & Investment', desc: 'Commercial real estate, leasing, and investment advisory.' },
+      ],
+    },
     footer: {
       taglineLines: [
         'Toronto-based tax and business advisory firm.',
@@ -163,7 +203,7 @@ export const translations = {
   },
 
   zh: {
-    nav: { home: '首页', team: '合伙人团队', contact: '联系我们' },
+    nav: { home: '首页', team: '合伙人团队', links: '实用链接', partners: '合作伙伴', contact: '联系我们' },
     hero: {
       title1: '专业财税与商业咨询服务',
       title2: '助力企业稳健增长与长期合规',
@@ -292,6 +332,46 @@ export const translations = {
         organizations: ['齐鲁同乡会', '加拿大关爱狮子会'],
         value: '构建稳定、规范、可持续的财务体系，保障企业长期合规运营。',
       },
+    },
+    links: {
+      pageTitle: '实用链接',
+      pageSubtitle: '客户最常用的税务、合规与公司设立资源',
+      groups: [
+        {
+          heading: '政府与税务',
+          items: [
+            { name: '加拿大税务局 (CRA)', url: '#', desc: '联邦报税、GST/HST、薪资税及企业税务账户。' },
+            { name: '安省财政部', url: '#', desc: '省级税务项目及雇主健康税。' },
+            { name: '安省政府服务 (Service Ontario)', url: '#', desc: '企业登记、牌照及合规申报。' },
+          ],
+        },
+        {
+          heading: '合规与专业机构',
+          items: [
+            { name: 'CPA Canada 加拿大注册会计师协会', url: '#', desc: '准则、出版物及从业资源。' },
+            { name: 'WSIB Ontario 安省工伤保险', url: '#', desc: '安省雇主的工作场所安全与保险。' },
+          ],
+        },
+        {
+          heading: '公司设立',
+          items: [
+            { name: '联邦公司注册', url: '#', desc: '依据《加拿大商业公司法》注册公司。' },
+            { name: '安省企业注册系统', url: '#', desc: '安省企业及公司的注册、续期与变更。' },
+          ],
+        },
+      ],
+    },
+    partners: {
+      pageTitle: '合作伙伴',
+      pageSubtitle: '我们与多家专业机构长期合作，共同服务客户',
+      items: [
+        { name: '合作机构 A', tag: '法律与公司事务', desc: '为成长型客户提供企业法律顾问及合同咨询服务。' },
+        { name: '合作机构 B', tag: '银行与金融', desc: '面向中小企业及集团客户的商业银行及信贷服务。' },
+        { name: '合作机构 C', tag: '移民与跨境', desc: '移民、工签及跨境架构咨询。' },
+        { name: '合作机构 D', tag: '保险与风险', desc: '商业保险、团体福利及风险管理。' },
+        { name: '合作机构 E', tag: '科技与运营', desc: '云端账务、ERP 及财务自动化部署。' },
+        { name: '合作机构 F', tag: '房地产与投资', desc: '商业地产、租赁及投资顾问。' },
+      ],
     },
     footer: {
       taglineLines: ['多伦多专业财税事务所。', '中 · 英 · 法三语服务企业与机构客户。'],

@@ -382,6 +382,88 @@ const TeamView = () => {
 };
 
 
+// --- 实用链接视图 ---
+
+const LinksView = () => {
+  const { t } = useI18n();
+  const page = t.links;
+  return (
+    <div className="animate-fadeIn pt-24 pb-20 bg-slate-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{page.pageTitle}</h1>
+          <p className="text-lg text-slate-600">{page.pageSubtitle}</p>
+          <div className="w-24 h-1 bg-amber-500 mx-auto mt-6"></div>
+        </div>
+
+        <div className="space-y-12">
+          {page.groups.map((group, gi) => (
+            <div key={gi} className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 md:p-10">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">
+                {group.heading}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {group.items.map((item, ii) => (
+                  <a
+                    key={ii}
+                    href={item.url}
+                    className="block p-5 rounded-lg border border-slate-100 hover:border-amber-200 hover:shadow-md transition-all group bg-slate-50 hover:bg-white"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-base font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">
+                        {item.name}
+                      </h3>
+                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <p className="text-sm text-slate-600">{item.desc}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- 合作伙伴视图 ---
+
+const PartnersView = () => {
+  const { t } = useI18n();
+  const page = t.partners;
+  return (
+    <div className="animate-fadeIn pt-24 pb-20 bg-slate-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{page.pageTitle}</h1>
+          <p className="text-lg text-slate-600">{page.pageSubtitle}</p>
+          <div className="w-24 h-1 bg-amber-500 mx-auto mt-6"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {page.items.map((item, i) => (
+            <div
+              key={i}
+              className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-amber-200 transition-all"
+            >
+              <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-6">
+                <Briefcase className="w-7 h-7" />
+              </div>
+              <p className="text-xs uppercase tracking-wider text-amber-600 font-semibold mb-2">
+                {item.tag}
+              </p>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">{item.name}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 // --- 主应用入口 ---
 
 export default function App() {
@@ -443,6 +525,18 @@ export default function App() {
                 {t.nav.team}
               </button>
               <button
+                onClick={() => navigateTo('links')}
+                className={`font-medium transition-colors hover:text-amber-500 ${scrolled ? 'text-slate-700' : 'text-slate-300'} ${currentView === 'links' && '!text-amber-500'}`}
+              >
+                {t.nav.links}
+              </button>
+              <button
+                onClick={() => navigateTo('partners')}
+                className={`font-medium transition-colors hover:text-amber-500 ${scrolled ? 'text-slate-700' : 'text-slate-300'} ${currentView === 'partners' && '!text-amber-500'}`}
+              >
+                {t.nav.partners}
+              </button>
+              <button
                 onClick={toggleLang}
                 aria-label="Toggle language"
                 className={`text-sm font-semibold px-3 py-1.5 rounded-full border transition-colors ${
@@ -497,6 +591,18 @@ export default function App() {
               >
                 {t.nav.team}
               </button>
+              <button
+                onClick={() => navigateTo('links')}
+                className={`block px-3 py-4 text-left font-medium border-b border-slate-50 ${currentView === 'links' ? 'text-amber-600' : 'text-slate-700'}`}
+              >
+                {t.nav.links}
+              </button>
+              <button
+                onClick={() => navigateTo('partners')}
+                className={`block px-3 py-4 text-left font-medium border-b border-slate-50 ${currentView === 'partners' ? 'text-amber-600' : 'text-slate-700'}`}
+              >
+                {t.nav.partners}
+              </button>
               <div className="pt-4 px-3">
                 <Button className="w-full" onClick={() => { setIsMobileMenuOpen(false); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }}>
                   {t.hero.ctaPrimary}
@@ -509,7 +615,10 @@ export default function App() {
 
       {/* 动态渲染视图内容 */}
       <main>
-        {currentView === 'home' ? <HomeView navigateTo={navigateTo} /> : <TeamView />}
+        {currentView === 'team' && <TeamView />}
+        {currentView === 'links' && <LinksView />}
+        {currentView === 'partners' && <PartnersView />}
+        {currentView === 'home' && <HomeView navigateTo={navigateTo} />}
       </main>
 
       {/* 8. 联系方式 (通用 Footer) */}
